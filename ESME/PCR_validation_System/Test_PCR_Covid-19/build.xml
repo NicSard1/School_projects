@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="PCRProjet" basedir="." default="main">
+
+    <description>
+        Projet Java pour la validation des tests PCR Covid-19.
+    </description>
+
+    <!-- Définir les propriétés -->
+    <property name="src.dir" value="src" />
+    <property name="build.dir" value="build" />
+    <property name="main.class" value="Controller.Test_PCRProjet" />
+
+    <!-- Configuration du chemin de classe -->
+    <path id="classpath">
+        <pathelement location="${build.dir}" />
+    </path>
+
+    <!-- Cible pour la compilation -->
+    <target name="compile" description="Compile les fichiers source Java">
+        <mkdir dir="${build.dir}" />
+        <javac srcdir="${src.dir}" destdir="${build.dir}" includeantruntime="false" />
+    </target>
+
+    <!-- Cible pour la création du JAR -->
+    <target name="jar" depends="compile" description="Crée le fichier JAR">
+        <jar destfile="Test_PCRProjet.jar" basedir="${build.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="${main.class}" />
+            </manifest>
+        </jar>
+    </target>
+
+    <!-- Cible par défaut -->
+    <target name="main" depends="jar">
+        <java jar="Test_PCRProjet.jar" fork="true">
+            <!-- Ajoutez des arguments ici si nécessaire -->
+        </java>
+    </target>
+
+    <!-- Librairie pour l'utilisation de la BD MySQL -->
+     <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>8.2.0</version>
+    </dependency>
+
+</project>
